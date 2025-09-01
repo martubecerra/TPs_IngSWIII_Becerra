@@ -3,16 +3,23 @@
 ## Cómo construir las imágenes
 
 1. Ve a la carpeta del microservicio:
+   
    cd users-api
-   docker build -t martubecerra/users-api:v1.0 .
+   
+   docker build -t martubecerra/users-api:v1.0 
+   
    docker push martubecerra/users-api:v1.0
+   
    docker tag martubecerra/users-api:v1.0 martubecerra/users-api:dev
+   
    docker push martubecerra/users-api:dev
 
 ## Cómo ejecutar los contenedores
 
 2. Ve a la carpeta del docker-compose:
+   
    cd ..
+   
    docker-compose up
 
 ## Cómo acceder a la aplicación
