@@ -1,8 +1,10 @@
+*.bak
 .DS_Store
 __pycache__/
-*.pyc
+*.py[cod]
 venv/
 .env/
 *.log
-*.bak
-
+.vscode/
+.idea/
+Thumbs.db
