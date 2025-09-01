@@ -1,1 +1,2 @@
 Línea en main
+Línea en rama-conflicto
