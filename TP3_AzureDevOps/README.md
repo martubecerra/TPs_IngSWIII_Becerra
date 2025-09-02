@@ -8,7 +8,7 @@ Este repositorio contiene la configuración y evidencias del trabajo práctico T
 
 ## 1. Acceder al proyecto de Azure DevOps
 
-- Ingresa a [Azure DevOps](https://dev.azure.com/martubecerra/TP3_DevOps_Agile)
+- Ingresa a [Azure DevOps - TP3_DevOps_Agile](https://dev.azure.com/martubecerra/TP3_DevOps_Agile)
 - Accede con tu cuenta institucional o la cuenta invitada por el equipo.
 - Navega por los Boards, Repos, Pipelines y Pull Requests para ver la configuración y el estado del proyecto.
 
@@ -74,3 +74,4 @@ cd TPs_IngSWIII_Becerra
 Esta estructura permite gestionar el ciclo de vida del desarrollo, la colaboración y la automatización en
 
 ---
+
