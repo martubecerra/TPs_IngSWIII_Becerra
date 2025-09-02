@@ -1,4 +1,4 @@
-# Decisiones.md
+# Decisiones Técnicas - TP3
 
 ## Metodología ágil elegida y justificación
 
@@ -40,3 +40,4 @@ Esta estructura asegura trazabilidad, claridad en la asignación de responsabili
   - **Solución:** Se ajustaron las políticas para permitir la aprobación por el autor en caso de trabajo individual.
 
 ---
+
