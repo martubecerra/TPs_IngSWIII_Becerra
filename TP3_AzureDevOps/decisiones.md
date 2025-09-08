@@ -30,6 +30,9 @@ Esta estructura asegura trazabilidad, claridad en la asignación de responsabili
 
 ### Pipeline
 
+<img width="1211" height="543" alt="image" src="https://github.com/user-attachments/assets/b25e59df-c072-4cdd-9b75-8d5c32e9dd05" />
+<img width="1184" height="68" alt="image" src="https://github.com/user-attachments/assets/fd428e80-dcad-4f96-8f01-ecf6ff1661c6" />
+
 ## Problemas encontrados y soluciones aplicadas
 
 - **Problema:** No se pudo ejecutar el pipeline por falta de paralelismo gratuito en Azure DevOps.
@@ -40,4 +43,5 @@ Esta estructura asegura trazabilidad, claridad en la asignación de responsabili
   - **Solución:** Se ajustaron las políticas para permitir la aprobación por el autor en caso de trabajo individual.
 
 ---
+
 
