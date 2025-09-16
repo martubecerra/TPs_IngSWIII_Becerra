@@ -5,14 +5,14 @@
 ### Stack Tecnológico
 
 - **Frontend**: React
-  - Elegido por su popularidad, facilidad de uso y amplia adopción en la industria.
-  - Permite crear interfaces de usuario interactivas de forma eficiente.
-  - Facilita la creación de componentes reutilizables.
+  - Elegido por su popularidad y facilidad de uso
+  - Permite crear interfaces de usuario interactivas
+  - Gran ecosistema de npm packages
 
 - **Backend**: Node.js con Express
-  - Proporciona un entorno de ejecución JavaScript del lado del servidor.
-  - Express ofrece un framework minimalista pero potente para crear APIs REST.
-  - Mantiene la coherencia al usar JavaScript tanto en frontend como backend.
+  - JavaScript en todo el stack (frontend y backend)
+  - Express para crear APIs REST simples
+  - Fácil configuración y testing
 
 ### Estructura del Repositorio
 
@@ -26,10 +26,9 @@ Se ha optado por un enfoque de mono-repo con la siguiente estructura:
 ```
 
 Ventajas de esta estructura:
-- Facilita la gestión de dependencias entre frontend y backend.
-- Simplifica la configuración del pipeline CI/CD.
-- Permite una visión unificada del proyecto.
-- Facilita la coordinación de cambios que afectan a ambas partes.
+- Gestión centralizada del código
+- Configuración simple del pipeline CI
+- Fácil mantenimiento y coordinación de cambios
 
 ## Diseño del Pipeline
 
@@ -37,53 +36,57 @@ Ventajas de esta estructura:
 
 El pipeline se ha diseñado con un enfoque multi-stage:
 
-- **Stage CI (Continuous Integration)**:
-  - **Job: BuildFrontend**: Compila y empaqueta la aplicación React.
-  - **Job: BuildBackend**: Compila y prueba la API Node.js.
-
-Los jobs se ejecutan en paralelo para optimizar el tiempo de ejecución del pipeline.
+```yaml
+stages:
+- stage: CI
+  jobs:
+  - job: BuildBackend
+    steps:
+    - Build y test de Node.js
+    - Publicación de artefactos
+  
+  - job: BuildFrontend
+    steps:
+    - Build de React
+    - Publicación de artefactos
+```
 
 ### Artefactos
 
 Se publican dos artefactos principales:
 
-1. **frontend-build**: Contiene los archivos estáticos compilados del frontend.
-2. **backend-build**: Contiene el código del backend listo para ser desplegado.
+1. **frontend-dist**: Contiene los archivos estáticos compilados del frontend.
+2. **backend-dist**: Contiene el código del backend listo para ser desplegado.
 
 La publicación de artefactos permite:
 - Conservar los resultados de la compilación para su uso posterior.
 - Facilitar el despliegue en diferentes entornos.
 - Mantener un historial de versiones compiladas.
 
-## Agente Self-Hosted
-
-Se ha elegido utilizar un agente Self-Hosted por las siguientes razones:
-
-1. **Control total del entorno**: Permite personalizar completamente el entorno de ejecución.
-2. **Rendimiento**: Elimina la latencia de red al acceder a recursos internos.
-3. **Persistencia**: Permite mantener ciertas dependencias instaladas entre ejecuciones.
-4. **Acceso a recursos locales**: Facilita el acceso a recursos que no están disponibles públicamente.
-5. **Costo**: Reduce el consumo de minutos de ejecución en Azure DevOps.
-
 ## Evidencias
 
 ### Creación del Pool y Agente Self-Hosted
 
-[Aquí se incluirán capturas de pantalla mostrando la creación del pool "SelfHosted" y la configuración del agente local]
+<img width="866" height="568" alt="image" src="https://github.com/user-attachments/assets/f2e2ef78-bec6-4342-a42e-1ba1dd86f01c" />
+<img width="1138" height="486" alt="image" src="https://github.com/user-attachments/assets/88152555-a930-4ace-808b-e0f1faad8447" />
+<img width="2352" height="434" alt="image" src="https://github.com/user-attachments/assets/fc676573-1e5c-494f-8e7b-c2f6151035fe" />
 
 ### Ejecuciones de CI
 
-[Aquí se incluirán capturas de pantalla mostrando ejecuciones exitosas del pipeline de CI]
+<img width="1210" height="274" alt="image" src="https://github.com/user-attachments/assets/98fe368d-e115-4191-a31d-f1bddc8e783d" />
+<img width="1190" height="68" alt="image" src="https://github.com/user-attachments/assets/68f773bb-b434-4585-a55b-2aa60c6e7e8e" />
+<img width="1194" height="182" alt="image" src="https://github.com/user-attachments/assets/58c4692f-6def-40b5-8bef-027778a3a4c1" />
 
 ### Artefactos Publicados
 
-[Aquí se incluirán capturas de pantalla mostrando los artefactos publicados después de una ejecución exitosa]
+<img width="1215" height="234" alt="image" src="https://github.com/user-attachments/assets/e1878265-12d8-4f5b-8e6f-3ffc1384ca95" />
+<img width="1213" height="537" alt="image" src="https://github.com/user-attachments/assets/2ed5cdc1-4d4a-4d07-a1c9-5728586960f5" />
 
 ## Consideraciones Adicionales
 
 ### Uso de YAML vs Classic
 
-Se eligió YAML para definir el pipeline por las siguientes razones:
+Se prefiere YAML para definir el pipeline por las siguientes razones:
 
 1. **Versionamiento**: La definición del pipeline se almacena junto con el código fuente.
 2. **Revisión de cambios**: Los cambios en el pipeline pueden ser revisados mediante pull requests.
