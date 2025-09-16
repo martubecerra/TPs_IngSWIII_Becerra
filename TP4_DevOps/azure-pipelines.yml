@@ -20,12 +20,12 @@ stages:
       displayName: 'Instalar Node.js'
 
     - script: |
-        cd front
+        cd "$(System.DefaultWorkingDirectory)/front"
         npm ci
       displayName: 'Instalar dependencias del frontend'
 
     - script: |
-        cd front
+        cd "$(System.DefaultWorkingDirectory)/front"
         npm run build
       displayName: 'Build frontend'
 
@@ -45,12 +45,12 @@ stages:
       displayName: 'Instalar Node.js'
 
     - script: |
-        cd back
+        cd "$(System.DefaultWorkingDirectory)/back"
         npm ci
       displayName: 'Instalar dependencias del backend'
 
     - script: |
-        cd back
+        cd "$(System.DefaultWorkingDirectory)/back"
         npm test
       displayName: 'Ejecutar tests del backend'
 
