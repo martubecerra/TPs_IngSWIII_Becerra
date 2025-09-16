@@ -5,7 +5,7 @@ trigger:
 - main
 
 pool:
-  name: 'SelfHosted' # Nombre del pool que contiene el agente Self-Hosted
+  name: 'LocalPool' 
 
 stages:
 - stage: CI
