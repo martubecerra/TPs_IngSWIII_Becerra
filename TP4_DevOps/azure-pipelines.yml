@@ -2,61 +2,38 @@
 # Configurado para ejecutarse en un agente Self-Hosted
 
 trigger:
-- main
+  - main
 
 pool:
-  name: 'LocalPool' 
+  name: 'SelfHosted'
 
 stages:
 - stage: CI
-  displayName: 'Continuous Integration'
   jobs:
-  - job: BuildFrontend
-    displayName: 'Build Frontend'
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '18.x'
-      displayName: 'Instalar Node.js'
-
-    - script: |
-        cd "$(System.DefaultWorkingDirectory)/front"
-        npm ci
-      displayName: 'Instalar dependencias del frontend'
-
-    - script: |
-        cd "$(System.DefaultWorkingDirectory)/front"
-        npm run build
-      displayName: 'Build frontend'
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/front/build'
-        artifact: 'frontend-build'
-        publishLocation: 'pipeline'
-      displayName: 'Publicar artefactos del frontend'
-
   - job: BuildBackend
-    displayName: 'Build Backend'
     steps:
-    - task: NodeTool@0
+    - task: NodeJS@1
       inputs:
-        versionSpec: '18.x'
-      displayName: 'Instalar Node.js'
-
+        versionSpec: '16.x'
     - script: |
-        cd "$(System.DefaultWorkingDirectory)/back"
+        cd back
         npm ci
-      displayName: 'Instalar dependencias del backend'
-
-    - script: |
-        cd "$(System.DefaultWorkingDirectory)/back"
         npm test
-      displayName: 'Ejecutar tests del backend'
-
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/back'
-        artifact: 'backend-build'
-        publishLocation: 'pipeline'
-      displayName: 'Publicar artefactos del backend'
+        targetPath: 'back'
+        artifact: 'backend-dist'
+
+  - job: BuildFrontend
+    steps:
+    - task: NodeJS@1
+      inputs:
+        versionSpec: '16.x'
+    - script: |
+        cd front
+        npm ci
+        npm run build
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: 'front/build'
+        artifact: 'frontend-dist'
