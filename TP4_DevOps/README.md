@@ -13,10 +13,10 @@ Este proyecto implementa un pipeline CI/CD en Azure DevOps utilizando un agente 
 
 ## Requisitos Previos
 
-- Node.js 18.x o superior
-- NPM 8.x o superior
+- Node.js 24.x
+- NPM 11.x
 - Cuenta en Azure DevOps
-- Agente Self-Hosted configurado en Azure DevOps
+- Agente Self-Hosted configurado
 
 ## Ejecución Local
 
@@ -47,28 +47,40 @@ El backend estará disponible en http://localhost:3001
 
 ## Configuración del Agente Self-Hosted
 
-1. En Azure DevOps, ir a Project Settings > Agent pools
-2. Crear un nuevo pool llamado "SelfHosted"
-3. Agregar un nuevo agente
-4. Seguir las instrucciones para descargar e instalar el agente en tu máquina local
-5. Configurar el agente como servicio
+1. En Azure DevOps:
+   - Project Settings > Agent pools
+   - Crear pool "SelfHosted"
+   - Descargar agente
 
-## Pipeline CI/CD
+2. En local:
+   ```bash
+   mkdir myagent && cd myagent
+   tar zxvf vsts-agent-osx-x64-3.230.0.tar.gz
+   ./config.sh
+   ./run.sh
+   ```
 
-El pipeline está configurado para ejecutarse automáticamente cuando se realiza un push a la rama `main`. Incluye:
+## Pipeline CI
+
+El pipeline se ejecuta automáticamente en push a `main`:
 
 - **Stage CI**:
-  - Build del frontend (React)
-  - Build del backend (Node.js)
-  - Ejecución de tests
-  - Publicación de artefactos
+  - BuildBackend:
+    - Compilación Node.js
+    - Tests unitarios
+    - Publicación backend-dist (28 MB)
+  
+  - BuildFrontend:
+    - Compilación React
+    - Publicación frontend-dist (708 KB)
 
 ## Puertos
 
 - Frontend: 3000
 - Backend: 3001
 
-## Notas Adicionales
+## Artefactos Generados
 
-- El agente Self-Hosted debe tener instalado Node.js y NPM
-- El pipeline está configurado para usar Node.js 18.x
+- **frontend-dist**: Build optimizado de React (708 KB)
+- **backend-dist**: Código Node.js y dependencias (28 MB)
+
