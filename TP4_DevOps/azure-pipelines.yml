@@ -12,28 +12,32 @@ stages:
   jobs:
   - job: BuildBackend
     steps:
-    - task: NodeJS@1
-      inputs:
-        versionSpec: '16.x'
+    - checkout: self
+      path: s/TP4_DevOps
     - script: |
-        cd back
+        node --version
+        npm --version
+        cd $(Build.SourcesDirectory)/TP4_DevOps/back
         npm ci
         npm test
+      displayName: 'Build and Test Backend'
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: 'back'
+        targetPath: '$(Build.SourcesDirectory)/TP4_DevOps/back'
         artifact: 'backend-dist'
 
   - job: BuildFrontend
     steps:
-    - task: NodeJS@1
-      inputs:
-        versionSpec: '16.x'
+    - checkout: self
+      path: s/TP4_DevOps
     - script: |
-        cd front
+        node --version
+        npm --version
+        cd $(Build.SourcesDirectory)/TP4_DevOps/front
         npm ci
         npm run build
+      displayName: 'Build Frontend'
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: 'front/build'
+        targetPath: '$(Build.SourcesDirectory)/TP4_DevOps/front/build'
         artifact: 'frontend-dist'
